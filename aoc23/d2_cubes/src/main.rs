@@ -1,4 +1,3 @@
-use core::panic;
 use std::fs;
 
 fn main() {
@@ -6,7 +5,7 @@ fn main() {
     let max_red : u64 = 12;
     let max_green : u64= 13;
     let max_blue  : u64= 14;
-
+    
     let ok_games_id_sum = input.split("\n")
                                     .filter(|line| *line != "")
                                     .map(|line| {
@@ -30,6 +29,7 @@ fn main() {
                                         }
                                         true
                                     }).fold(0, |acc, x| acc+x.0);
+                                    // }).sum();
 
     println!("{:#?}",ok_games_id_sum);
 }

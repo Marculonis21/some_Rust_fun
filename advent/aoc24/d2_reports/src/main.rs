@@ -27,15 +27,19 @@ fn main() {
     let count = get_reports(&input).iter().filter(|line| check_safety(line)).count();
     println!("Part1: {}",count);
     let count = get_reports(&input).iter().filter(|line| {
+        if check_safety(line) { return true }
+
         let mut line_proxy;
-        let mut cond = false;
-        // really inneficient
+
         for i in 0..line.len() {
             line_proxy = line.to_vec();
             line_proxy.remove(i);
-            cond = cond || check_safety(&line_proxy);
+            if check_safety(&line_proxy) {
+                return true;
+            }
         }
-        return cond;
+
+        return false
     }).count();
     println!("Part2: {}",count);
 }

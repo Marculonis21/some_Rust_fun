@@ -1,5 +1,4 @@
 use std::fs;
-use rayon::prelude::*;
 use std::collections::HashMap;
 
 #[derive(Debug, Hash, Eq, PartialEq, Clone)]
@@ -96,18 +95,10 @@ fn main() {
         res += dfs_iter_with_memory(&mut memory, s.clone(), 0, 75);
     }
 
-    for i in 0..75 {
-        println!("{} - {}", i, memory[i].len());
-    }
+    // for i in 0..75 {
+    //     println!("{} - {}", i, memory[i].len());
+    // }
 
-    println!("{}",res);
-
-    // let p2: i32 = stones_p2.into_par_iter().map(|stone| {
-    //     println!("Working on - {:?}", stone);
-    //     let res = dfs_iter(&memory, &stone, 0, 75);
-    //     println!("Done - {:?}", stone);
-    //     res
-    // }).sum();
     println!("Part1 {:?}", stones_p1.len());
-    // println!("Part2 {:?}", p2);
+    println!("Part2 {}",res);
 }

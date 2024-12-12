@@ -44,21 +44,28 @@ fn get_starters(map: &Vec<Vec<i8>>) -> Vec<Pos> {
 }
 
 // dfs basically
-fn go_on_trail(map: &Vec<Vec<i8>>, pos: Pos, found: &mut HashSet<Pos>) -> i32 {
+fn go_on_trail(map: &Vec<Vec<i8>>, pos: Pos, found: &mut HashSet<Pos>, part1: bool) -> i32 {
     if map[pos.y][pos.x] == 9 { 
-        if !found.contains(&pos) {
-            found.insert(pos);
+        if part1 {
+            //part1 sum of uniques ends
+            if !found.contains(&pos) {
+                found.insert(pos);
 
+                return 1;
+            }
+
+            return 0; 
+        }
+        else {
+            //part1 sum of uniques paths
             return 1;
         }
-
-        return 0; 
     }
 
     let mut successful = 0;
     for next in pos.get_surround(map[0].len(), map.len()) {
         if map[pos.y][pos.x]+1 == map[next.y][next.x] {
-            successful += go_on_trail(map, next, found);
+            successful += go_on_trail(map, next, found, part1);
         }
     }
 
@@ -74,7 +81,9 @@ fn main() {
                                            .map(|x| x.parse().unwrap()).collect()).collect();
 
     let starters = get_starters(&map);
-    let result_p1: i32 = starters.iter().map(|s| go_on_trail(&map, s.clone(), &mut HashSet::new())).sum(); 
+    let result_p1: i32 = starters.iter().map(|s| go_on_trail(&map, s.clone(), &mut HashSet::new(), true)).sum(); 
+    let result_p2: i32 = starters.iter().map(|s| go_on_trail(&map, s.clone(), &mut HashSet::new(), false)).sum(); 
 
     println!("Part1: {}", result_p1);
+    println!("Part2: {}", result_p2);
 }

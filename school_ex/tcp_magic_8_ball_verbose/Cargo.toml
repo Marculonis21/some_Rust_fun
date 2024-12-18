@@ -1,0 +1,9 @@
+[package]
+name = "tcp_magic_8_ball_verbose"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.94"
+rand = "0.8.5"
+tokio = {version="1.42.0", features=["full"]}

@@ -1,0 +1,8 @@
+[package]
+name = "par_sat"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.94"
+tokio = { version = "1.42.0", feature = ["full"], features = ["full"] }

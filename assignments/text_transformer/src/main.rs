@@ -1,5 +1,4 @@
-use slug::slugify;
-use core::panic;
+use core::{panic, str};
 use std::env;
 
 // V1 STRATEGY Approach
@@ -22,7 +21,17 @@ impl Transmutation for UpperCaseTransmutation {
 struct SlugifyTransmutation;
 impl Transmutation for SlugifyTransmutation{
     fn transmute(&self, data: &str) -> String {
-        slugify(data)
+        let output = data.to_string()
+                         .to_lowercase()
+                         .chars()
+                         .map(|c| {
+                             match c {
+                                 'a'..='z' | '0'..='9' | '-' | '_' => c,
+                                 ' ' => '-',
+                                 _ => ' '
+                             }
+                         }).filter(|c| !c.is_whitespace()).collect();
+        output
     }
 }
 struct NospaceTransmutation;

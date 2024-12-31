@@ -4,9 +4,7 @@ use nom::sequence::preceded;
 use nom::sequence::separated_pair;
 use nom::IResult;
 use core::f64;
-use std::collections::binary_heap::Iter;
 use std::fs;
-use std::slice;
 
 #[derive(Default)]
 struct Problem {

@@ -1,0 +1,7 @@
+[package]
+name = "sfml_test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sfml = "=0.24.0"

@@ -1,0 +1,3 @@
+[submodule "GoodBoyDrone"]
+	path = GoodBoyDrone
+	url = https://github.com/Marculonis21/GoodBoyDrone.git

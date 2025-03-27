@@ -104,7 +104,8 @@ impl Alarm {
             move || {
                 let mut tick_count = 0;
                 while tick_count < ticks_to_wait {
-                    tick_count = clock_channel.next(); 
+                    let _ = clock_channel.next(); 
+                    tick_count += 1;
                 }
                 // not keeping the action as it should just run once and die
                 action(); 
@@ -119,16 +120,12 @@ impl Alarm {
 }
 
 fn main() {
-    let clock = Clock::new(Duration::from_secs(1));
+    let clock = Clock::new(Duration::from_millis(1));
 
-    Alarm::new(&clock, 2, || println!("Alarm1!"));
-    Alarm::new(&clock, 4, || println!("Alarm2!"));
-    Alarm::new(&clock, 6, || println!("Alarm3!"));
-
-    Alarm::new(&clock.clone(), 4, move || {
-            println!("FIRST STAGE");
-            Alarm::new(&clock, 4, move || println!("Four!"));
+    Alarm::new(&clock.clone(), 50, move || {
+            println!("FIRST");
+            Alarm::new(&clock, 80, move || println!("SECOND"));
         });
 
-    thread::sleep(Duration::from_secs(10));
+    thread::sleep(Duration::from_secs(2));
 }
